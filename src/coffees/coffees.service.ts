@@ -1,5 +1,10 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
-import { CoffeeEntity } from './entities/coffee.entity';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Coffee } from './entities/coffee.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
@@ -7,8 +12,10 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Injectable()
 export class CoffeesService {
-  constructor(@InjectRepository(CoffeeEntity) private readonly coffeeRepository: Repository<CoffeeEntity>) {
-  }
+  constructor(
+    @InjectRepository(Coffee)
+    private readonly coffeeRepository: Repository<Coffee>,
+  ) {}
 
   findAll() {
     return this.coffeeRepository.find();
