@@ -12,12 +12,13 @@ import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { ApiForbiddenResponse, ApiResponse } from '@nestjs/swagger';
 
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeeService: CoffeesService) {
-  }
+  constructor(private readonly coffeeService: CoffeesService) {}
 
+  @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     return this.coffeeService.findAll(paginationQuery);
